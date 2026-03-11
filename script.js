@@ -1,5 +1,9 @@
 const form = document.getElementById("anadir-peliculas");
-const peliculas = [];
+let peliculas = [];
+if (localStorage.getItem("peliculas")) { //Recupera los datos del localStorage de la variable peliculas
+  peliculas = JSON.parse(localStorage.getItem("peliculas")); //Convierte peliculas de nuevo a un array, ya que fue almacenado en localStorage como String, debido a que este solo soporta almacenamiento de Strings
+}
+console.log(peliculas);
 
 //VALIDACION FORMULARIO, AÑADIR PELICULAS ARRAY
 form.addEventListener("submit", (event) => {
@@ -62,8 +66,5 @@ form.addEventListener("submit", (event) => {
   };
 
   peliculas.push(nuevaPelicula);
-
-  console.log(peliculas);
-  
-
+  localStorage.setItem("peliculas", JSON.stringify(peliculas)); //Añade el array peliculas al localStorage como String, ya que localStorage solo almacena Strings
 });
