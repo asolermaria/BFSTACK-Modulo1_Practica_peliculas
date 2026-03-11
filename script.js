@@ -93,22 +93,25 @@ form.addEventListener("submit", (event) => {
   </tr>`;
 });
 
-//FILTRADO POR GÉNERO **PENDIENTE**
-const filtroGenero = document.getElementById("filtro-genero")
+//FILTRADO POR GÉNERO
+const filtroGenero = document.getElementById("filtro-genero");
 
-filtroGenero.addEventListener("change", (event) =>{
-    const generoSeleccionado = event.target.value;
-    tablaPeliculas.innerHTML = ""
+filtroGenero.addEventListener("change", (event) => {
+  const generoSeleccionado = event.target.value;
+  tablaPeliculas.innerHTML = "";
 
-    for (pelicula of peliculas){
-        if (generoSeleccionado === pelicula.genero){
-            tablaPeliculas.innerHTML += `<tr>
+  for (pelicula of peliculas) {
+    if (
+      generoSeleccionado === "Todos" ||
+      generoSeleccionado === pelicula.genero
+    ) {
+      tablaPeliculas.innerHTML += `<tr>
                 <td>${pelicula.titulo}</td>
                 <td>${pelicula.descripcion}</td>
                 <td><img src="${pelicula.foto}" width="100"></td>
                 <td>${pelicula.anio}</td>
                 <td>${pelicula.genero}</td>
             </tr>`;
-        }
     }
-})
+  }
+});
