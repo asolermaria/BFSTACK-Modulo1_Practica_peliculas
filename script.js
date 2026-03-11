@@ -1,11 +1,24 @@
-const form = document.getElementById("anadir-peliculas");
-let peliculas = [];
-if (localStorage.getItem("peliculas")) { //Recupera los datos del localStorage de la variable peliculas
+const form = document.getElementById("anadir-peliculas"); //Declaramos el formulario de HTML
+let peliculas = []; //Declaramos el array donde se almacenan las peliculas
+const tablaPeliculas = document.getElementById("tabla-peliculas"); //Declaramos la tabla de HTML
+
+//Recupera los datos del localStorage de la variable peliculas
+if (localStorage.getItem("peliculas")) {
   peliculas = JSON.parse(localStorage.getItem("peliculas")); //Convierte peliculas de nuevo a un array, ya que fue almacenado en localStorage como String, debido a que este solo soporta almacenamiento de Strings
 }
-console.log(peliculas);
 
-//VALIDACION FORMULARIO, AÑADIR PELICULAS ARRAY
+//Recupera las peliculas ya almacenadas en el array y las reflejamos en la tabla
+for (let pelicula of peliculas) {
+  tablaPeliculas.innerHTML += `<tr>
+    <td>${pelicula.titulo}</td>
+    <td>${pelicula.descripcion}</td>
+    <td><img src="${pelicula.foto}" width="100"></td>
+    <td>${pelicula.anio}</td>
+    <td>${pelicula.genero}</td>
+  </tr>`;
+}
+
+//VALIDACION FORMULARIO, AÑADIR PELICULAS ARRAY Y TABLA
 form.addEventListener("submit", (event) => {
   event.preventDefault(); //Paramos envío del formulario
 
@@ -14,7 +27,7 @@ form.addEventListener("submit", (event) => {
   const anio = event.target.anio.value.trim();
   const descripcion = event.target.descripcion.value.trim();
   const foto = event.target.foto.value.trim();
-  const genero = event.target.genero.value
+  const genero = event.target.genero.value;
 
   //Validamos que el campo titulo tenga al menos un caracter (Antes con el .trim quitamos los espacios)
   if (titulo === "") {
@@ -52,19 +65,38 @@ form.addEventListener("submit", (event) => {
     return;
   }
 
+  //TERMINADA VALIDACIÓN DEL FORMULARIO, LIMPIAMOS LOS CAMPOS DEL MISMO
   alert("Pelicula añadida");
-  form.reset();
+  form.reset(); //Una vez pasan todas las validaciones, limpiamos los campos del formulario
 
-  //VALIDADO EL FORMULARIO, AÑADIMOS PELICULA A ARRAY
+  //AÑADIMOS PELICULA AL ARRAY
 
   const nuevaPelicula = {
     titulo: titulo,
     descripcion: descripcion,
     foto: foto,
     anio: anioNumero,
-    genero: genero
+    genero: genero,
   };
-
   peliculas.push(nuevaPelicula);
+
   localStorage.setItem("peliculas", JSON.stringify(peliculas)); //Añade el array peliculas al localStorage como String, ya que localStorage solo almacena Strings
+
+  //AÑADIR PELICULAS DEL ARRAY A LA TABLA
+
+  tablaPeliculas.innerHTML += `<tr>
+    <td>${nuevaPelicula.titulo}</td>
+    <td>${nuevaPelicula.descripcion}</td>
+    <td><img src="${nuevaPelicula.foto}" width="100"></td>
+    <td>${nuevaPelicula.anio}</td>
+    <td>${nuevaPelicula.genero}</td>
+  </tr>`;
 });
+
+//FILTRADO POR GÉNERO **PENDIENTE**
+const filtroGenero = document.getElementById("filtro-genero")
+
+filtroGenero.addEventListener("change", (event) =>{
+    const generoSeleccionado = event.target.value;
+    tablaPeliculas.innerHTML = ""
+})

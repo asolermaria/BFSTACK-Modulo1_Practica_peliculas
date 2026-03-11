@@ -19,9 +19,9 @@
 
       <label for="foto">URL Foto:</label>
       <input type="text" name="foto" />
-
+    
+      <label for="genero">Género:</label>
       <select name="genero">
-        Género
         <option value="Terror">Terror</option>
         <option value="Accion">Acción</option>
         <option value="Comedia">Comedia</option>
@@ -30,6 +30,24 @@
 
       <button type="submit">Añadir película</button>
     </form>
+
+    <span>Filtrado por género:</span>
+    <select name="" id="filtro-genero">
+        <option value="Terror">Terror</option>
+        <option value="Accion">Acción</option>
+        <option value="Comedia">Comedia</option>
+        <option value="Romantica">Romántica</option>
+    </select>
+
+    <table id="tabla-peliculas">
+        <tr>
+            <th>Titulo</th>
+            <th>Año</th>
+            <th>Descripción</th>
+            <th>Foto</th>
+            <th>Género</th>
+        </tr>
+    </table>
 
     <script src="./script.js"></script>
   </body>
