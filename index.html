@@ -3,52 +3,84 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
     <title>Document</title>
   </head>
 
   <body>
-    <span>Añade una nueva película</span>
-    <form id = "anadir-peliculas">
-      <label for="titulo">Titulo:</label>
-      <input type="text" name="titulo" />
+    <header>
+      <h1>PRÁCTICA PELÍCULAS</h1>
+    </header>
 
-      <label for="anio">Año:</label>
-      <input type="text" name="anio" />
+    <section id="section-anadir">
+      <h2>Añade una película</h2>
+      <form id="form-anadir-peliculas">
 
-      <label for="descripcion">Descripción:</label>
+        <article class="campo-formulario">
+        <label for="titulo">Titulo:</label>
+        <input type="text" name="titulo" />
+        </article>
+
+        <article class="campo-formulario">
+          <label for="anio">Año:</label>
+          <input type="text" name="anio" />
+        </article>
+
+        <article class="campo-formulario">
+          <label for="descripcion">Descripción:</label>
+          <input type="text" name="descripcion" />
+        </article>
+
+        <article class="campo-formulario">
+          <label for="foto">URL Foto:</label>
+          <input type="text" name="foto" />
+        </article>
+
+        <article class="campo-formulario">
+          <label for="genero">Género:</label>
+          <select name="genero">
+            <option value="" disabled selected>Selecciona género</option>
+            <option value="Terror">Terror</option>
+            <option value="Accion">Acción</option>
+            <option value="Comedia">Comedia</option>
+            <option value="Romantica">Romántica</option>
+          </select>
+        </article>
+
+        <button type="submit">Añadir película</button>
+      </form>
+    </section>
+
+    <section id="section-filtrar">
+      <h2>Filtrado de películas</h2>
+
+      <article class="campo-filtro">
+      <label>Filtrado por nombre:</label>
       <input type="text" name="descripcion" />
+      </article>
 
-      <label for="foto">URL Foto:</label>
-      <input type="text" name="foto" />
-    
-      <label for="genero">Género:</label>
-      <select name="genero">
-        <option value="Terror">Terror</option>
-        <option value="Accion">Acción</option>
-        <option value="Comedia">Comedia</option>
-        <option value="Romantica">Romántica</option>
-      </select>
-
-      <button type="submit">Añadir película</button>
-    </form>
-
-    <span>Filtrado por género:</span>
-    <select name="" id="filtro-genero">
+      <article class="campo-filtro">
+      <label>Filtrado por género:</label>
+      <select name="" id="filtro-genero">
         <option value="Todos">Todos</option>
         <option value="Terror">Terror</option>
         <option value="Accion">Acción</option>
         <option value="Comedia">Comedia</option>
         <option value="Romantica">Romántica</option>
-    </select>
+      </select>
+      </article>
+
+    </section>
+    
 
     <table id="tabla-peliculas">
-        <tr>
-            <th>Titulo</th>
-            <th>Año</th>
-            <th>Descripción</th>
-            <th>Foto</th>
-            <th>Género</th>
-        </tr>
+      <tr>
+        <th>Titulo</th>
+        <th>Año</th>
+        <th>Descripción</th>
+        <th>Foto</th>
+        <th>Género</th>
+      </tr>
     </table>
 
     <script src="./script.js"></script>

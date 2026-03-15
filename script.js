@@ -1,4 +1,4 @@
-const form = document.getElementById("anadir-peliculas"); //Declaramos el formulario de HTML
+const form = document.getElementById("form-anadir-peliculas"); //Declaramos el formulario de HTML
 let peliculas = []; //Declaramos el array donde se almacenan las peliculas
 const tablaPeliculas = document.getElementById("tabla-peliculas"); //Declaramos la tabla de HTML
 
@@ -11,10 +11,14 @@ if (localStorage.getItem("peliculas")) {
 for (let pelicula of peliculas) {
   tablaPeliculas.innerHTML += `<tr>
     <td>${pelicula.titulo}</td>
+    <td>${pelicula.anio}</td>
     <td>${pelicula.descripcion}</td>
     <td><img src="${pelicula.foto}" width="100"></td>
-    <td>${pelicula.anio}</td>
     <td>${pelicula.genero}</td>
+    <td>
+      <button type="button">Editar película</button>
+      <button type="button">Borrar película</button>
+    </td>
   </tr>`;
 }
 
@@ -43,8 +47,8 @@ form.addEventListener("submit", (event) => {
     return;
   }
 
-  const anioActual = new Date().getFullYear();
-  const anioNumero = parseInt(anio);
+  const anioActual = new Date().getFullYear(); //Año actual
+  const anioNumero = parseInt(anio); //Convertimos a numero el año introducido
   if (anioNumero < 1800 || anioNumero > anioActual) {
     alert(`El año debe estar entre 1800 y ${anioActual}`);
     return;
@@ -85,11 +89,15 @@ form.addEventListener("submit", (event) => {
   //AÑADIR PELICULAS DEL ARRAY A LA TABLA
 
   tablaPeliculas.innerHTML += `<tr>
-    <td>${nuevaPelicula.titulo}</td>
-    <td>${nuevaPelicula.descripcion}</td>
-    <td><img src="${nuevaPelicula.foto}" width="100"></td>
-    <td>${nuevaPelicula.anio}</td>
-    <td>${nuevaPelicula.genero}</td>
+    <td>${pelicula.titulo}</td>
+    <td>${pelicula.anio}</td>
+    <td>${pelicula.descripcion}</td>
+    <td><img src="${pelicula.foto}" width="100"></td>
+    <td>${pelicula.genero}</td>
+    <td>
+      <button type="button">Editar película</button>
+      <button type="button">Borrar película</button>
+    </td>
   </tr>`;
 });
 
@@ -106,12 +114,16 @@ filtroGenero.addEventListener("change", (event) => {
       generoSeleccionado === pelicula.genero
     ) {
       tablaPeliculas.innerHTML += `<tr>
-                <td>${pelicula.titulo}</td>
-                <td>${pelicula.descripcion}</td>
-                <td><img src="${pelicula.foto}" width="100"></td>
-                <td>${pelicula.anio}</td>
-                <td>${pelicula.genero}</td>
-            </tr>`;
+        <td>${pelicula.titulo}</td>
+        <td>${pelicula.anio}</td>
+        <td>${pelicula.descripcion}</td>
+        <td><img src="${pelicula.foto}" width="100"></td>
+        <td>${pelicula.genero}</td>
+        <td>
+          <button type="button">Editar película</button>
+          <button type="button">Borrar película</button>
+        </td>
+      </tr>`;
     }
   }
 });
