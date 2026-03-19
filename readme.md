@@ -9,14 +9,16 @@ Proyecto de práctica. Esta aplicación web permite añadir y explorar película
 ## 📸 Capturas de la aplicación *PENDIENTE*
 
 ### Pantalla principal para añadir peliculas
-
+(assets\images\anadir_pelicula.png)
 
 ### Buscador y filtrado de películas
-
+(assets\images\filtro_peliculas.png)
 
 ---
 
 ## 📝 Descripción
+
+Proyecto desarrollado como práctica del Módulo 1 del Bootcamp de Desarrollo Web Fullstack en The Bridge.
 
 Esta aplicación permite:
 
@@ -46,6 +48,8 @@ Practica_peliculas/
 ├── style.css 
 ├── script.js
 └── README.md
+└──assets
+    └images
 ```
 
 ---
@@ -63,8 +67,7 @@ No requiere instalación ni dependencias.
 ---
 
 ## 👨‍💻 Autor
-Proyecto desarrollado como práctica del Módulo 1 del Bootcamp de Desarrollo Web Fullstack en The Bridge.
-Autor: Antonio Soler Maria
+Antonio Soler Maria
 
 ## 📅 Año
 2026
