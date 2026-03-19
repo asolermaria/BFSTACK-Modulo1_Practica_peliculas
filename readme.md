@@ -1,17 +1,12 @@
 # 🎬 Práctica Películas
 
+**🌐 Demo: https://asolermaria.github.io/BFSTACK-Modulo1_Practica_peliculas/**
+
 Proyecto de práctica. Esta aplicación web permite añadir y explorar películas, realizar búsquedas y ver detalles de cada una, usando **HTML, CSS y JavaScript**.
 
 ---
 
-## 🔗 Enlace al despliegue
-
-https://asolermaria.github.io/BFSTACK-Modulo1_Practica_peliculas/
-
----
-
-## 📸 Capturas de la aplicación **PENDIENTE**
-
+## 📸 Capturas de la aplicación *PENDIENTE*
 
 ### Pantalla principal para añadir peliculas
 
@@ -44,13 +39,14 @@ El objetivo es practicar conceptos fundamentales de **desarrollo front-end**, in
 
 ## 📁 Estructura del proyecto
 
-
+```
 Practica_peliculas/
 │
 ├── index.html
 ├── style.css 
 ├── script.js
 └── README.md
+```
 
 ---
 
@@ -66,10 +62,9 @@ No requiere instalación ni dependencias.
 
 ---
 
-👨‍💻 Autor
+## 👨‍💻 Autor
 Proyecto desarrollado como práctica del Módulo 1 del Bootcamp de Desarrollo Web Fullstack en The Bridge.
-
 Autor: Antonio Soler Maria
 
-📅 Año
+## 📅 Año
 2026
