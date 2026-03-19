@@ -6,13 +6,13 @@ Proyecto de práctica. Esta aplicación web permite añadir y explorar película
 
 ---
 
-## 📸 Capturas de la aplicación *PENDIENTE*
+## 📸 Capturas de la aplicación
 
-### Pantalla principal para añadir peliculas
-(assets\images\anadir_pelicula.png)
+### Pantalla principal para añadir películas
+![Pantalla principal](assets/images/anadir_pelicula.png)
 
 ### Buscador y filtrado de películas
-(assets\images\filtro_peliculas.png)
+![Buscador y filtrado](assets/images/filtro_peliculas.png)
 
 ---
 
@@ -47,9 +47,9 @@ Practica_peliculas/
 ├── index.html
 ├── style.css 
 ├── script.js
-└── README.md
-└──assets
-    └images
+├── README.md
+└── assets/
+    └── images/
 ```
 
 ---
