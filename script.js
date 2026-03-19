@@ -1,11 +1,9 @@
 const form = document.getElementById("form-anadir-peliculas"); //Declaramos el formulario de HTML
-let peliculas = []; //Declaramos el array donde se almacenan las peliculas
 const tablaPeliculas = document.getElementById("tabla-peliculas"); //Declaramos la tabla de HTML
+let peliculas = []; //Declaramos el array donde se almacenan las peliculas
 
 //Recupera los datos del localStorage de la variable peliculas
-if (localStorage.getItem("peliculas")) {
-  peliculas = JSON.parse(localStorage.getItem("peliculas")); //Convierte peliculas de nuevo a un array, ya que fue almacenado en localStorage como String, debido a que este solo soporta almacenamiento de Strings
-}
+peliculas = JSON.parse(localStorage.getItem("peliculas")); //Convierte peliculas de nuevo a un array, ya que fue almacenado en localStorage como String, debido a que este solo soporta almacenamiento de Strings
 
 //Recupera las peliculas ya almacenadas en el array y las reflejamos en la tabla
 for (let pelicula of peliculas) {
@@ -83,17 +81,16 @@ form.addEventListener("submit", (event) => {
     genero: genero,
   };
   peliculas.push(nuevaPelicula);
-
+  
   localStorage.setItem("peliculas", JSON.stringify(peliculas)); //Añade el array peliculas al localStorage como String, ya que localStorage solo almacena Strings
 
   //AÑADIR PELICULAS DEL ARRAY A LA TABLA
-
   tablaPeliculas.innerHTML += `<tr>
-    <td>${pelicula.titulo}</td>
-    <td>${pelicula.anio}</td>
-    <td>${pelicula.descripcion}</td>
-    <td><img src="${pelicula.foto}" width="100"></td>
-    <td>${pelicula.genero}</td>
+    <td>${nuevaPelicula.titulo}</td>
+    <td>${nuevaPelicula.anio}</td>
+    <td>${nuevaPelicula.descripcion}</td>
+    <td><img src="${nuevaPelicula.foto}" width="100"></td>
+    <td>${nuevaPelicula.genero}</td>
     <td>
       <button type="button">Editar película</button>
       <button type="button">Borrar película</button>
@@ -127,3 +124,30 @@ filtroGenero.addEventListener("change", (event) => {
     }
   }
 });
+
+//FILTRADO POR NOMBRE DE PELICULA
+const inputBusqueda = document.getElementById("busqueda-nombre");
+
+inputBusqueda.addEventListener("input", () => {
+const inputBusquedaMinuscula = inputBusqueda.value.toLowerCase()
+tablaPeliculas.innerHTML = "";
+
+for (pelicula of peliculas) {
+  let tituloPeliculaMinuscula = pelicula.titulo.toLowerCase()
+    if (
+      tituloPeliculaMinuscula.includes(inputBusquedaMinuscula)
+    ) {
+      tablaPeliculas.innerHTML += `<tr>
+        <td>${pelicula.titulo}</td>
+        <td>${pelicula.anio}</td>
+        <td>${pelicula.descripcion}</td>
+        <td><img src="${pelicula.foto}" width="100"></td>
+        <td>${pelicula.genero}</td>
+        <td>
+          <button type="button">Editar película</button>
+          <button type="button">Borrar película</button>
+        </td>
+      </tr>`;
+    }
+  }
+})

@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./style.css" />
-    <title>Document</title>
+    <title>Práctica películas</title>
   </head>
 
   <body>
@@ -23,7 +23,7 @@
 
         <article class="campo-formulario">
           <label for="anio">Año:</label>
-          <input type="text" name="anio" />
+          <input type="number" name="anio" />
         </article>
 
         <article class="campo-formulario">
@@ -53,15 +53,13 @@
 
     <section id="section-filtrar">
       <h2>Filtrado de películas</h2>
-
       <article class="campo-filtro">
       <label>Filtrado por nombre:</label>
-      <input type="text" name="descripcion" />
+      <input type="text" id="busqueda-nombre"/>
       </article>
-
       <article class="campo-filtro">
       <label>Filtrado por género:</label>
-      <select name="" id="filtro-genero">
+      <select id="filtro-genero">
         <option value="Todos">Todos</option>
         <option value="Terror">Terror</option>
         <option value="Accion">Acción</option>
@@ -73,14 +71,16 @@
     </section>
     
 
-    <table id="tabla-peliculas">
-      <tr>
+    <table>
+      <thead><tr>
         <th>Titulo</th>
         <th>Año</th>
         <th>Descripción</th>
         <th>Foto</th>
         <th>Género</th>
-      </tr>
+        <th>Opciones</th>
+      </tr></thead>
+      <tbody id="tabla-peliculas"></tbody>
     </table>
 
     <script src="./script.js"></script>
