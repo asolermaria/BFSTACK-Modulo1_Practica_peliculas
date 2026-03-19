@@ -2,7 +2,6 @@ const form = document.getElementById("form-anadir-peliculas"); //Declaramos el f
 const tablaPeliculas = document.getElementById("tabla-peliculas"); //Declaramos la tabla de HTML
 let peliculas = []; //Declaramos el array donde se almacenan las peliculas
 
-//Recupera los datos del localStorage de la variable peliculas
 peliculas = JSON.parse(localStorage.getItem("peliculas")); //Convierte peliculas de nuevo a un array, ya que fue almacenado en localStorage como String, debido a que este solo soporta almacenamiento de Strings
 
 //Recupera las peliculas ya almacenadas en el array y las reflejamos en la tabla
@@ -37,15 +36,15 @@ form.addEventListener("submit", (event) => {
     return;
   }
 
-  //Validamos que el campo año tenga 4 cifras y sea un número entre 1800 y el año actual
+  //Validamos que el campo año tenga 4 cifras
   const anioRegex = /^\d{4}$/;
-
   if (!anioRegex.test(anio)) {
     alert("Debe ser un año compuesto por 4 dígitos");
     return;
   }
 
-  const anioActual = new Date().getFullYear(); //Año actual
+  //Validamos que el campo año sea un número entre 1800 y el año actual
+  const anioActual = new Date().getFullYear(); //Obtenemos año actual
   const anioNumero = parseInt(anio); //Convertimos a numero el año introducido
   if (anioNumero < 1800 || anioNumero > anioActual) {
     alert(`El año debe estar entre 1800 y ${anioActual}`);
@@ -53,7 +52,6 @@ form.addEventListener("submit", (event) => {
   }
 
   //Validamos que el campo descripción tenga al menos 20 caracteres
-
   if (descripcion.length < 20) {
     alert("La descripción debe tener al menos 20 caracteres.");
     return;
@@ -61,7 +59,6 @@ form.addEventListener("submit", (event) => {
 
   //Validamos que el campo foto sea una URL válida
   const fotoRegex = /^(https?:\/\/.*\.(?:png|jpg|jpeg|gif|webp))$/i;
-
   if (!fotoRegex.test(foto)) {
     alert("Por favor, introduce una foto con una URL válida");
     return;
@@ -77,7 +74,6 @@ form.addEventListener("submit", (event) => {
   form.reset(); 
 
   //AÑADIMOS PELICULA AL ARRAY
-
   const nuevaPelicula = {
     titulo: titulo,
     descripcion: descripcion,
@@ -87,7 +83,8 @@ form.addEventListener("submit", (event) => {
   };
   peliculas.push(nuevaPelicula);
   
-  localStorage.setItem("peliculas", JSON.stringify(peliculas)); //Añade el array peliculas al localStorage como String, ya que localStorage solo almacena Strings
+  //Añade el array peliculas al localStorage como String, ya que localStorage solo almacena Strings
+  localStorage.setItem("peliculas", JSON.stringify(peliculas));
 
   //AÑADIR PELICULAS DEL ARRAY A LA TABLA
   tablaPeliculas.innerHTML += `<tr>
@@ -160,10 +157,10 @@ for (pelicula of peliculas) {
 //BORRAR PELICULA
 tablaPeliculas.addEventListener("click", (elemento) => { //Captura cuando se hace click en cualquier parte de la tabla
   if (elemento.target.textContent === "Borrar película") { //Si el texto del elemento sobre el que se ha hecho click es igual a "Borrar película":
-    const fila = elemento.target.closest("tr"); //Con Closest seleccionamos el siguiente elemento padre que sea <tr>
+    const fila = elemento.target.closest("tr"); //Con Closest seleccionamos el siguiente elemento padre que sea <tr> (fila)
     const titulo = fila.children[0].textContent; //Toma el texto de la primera celda <td> de la fila (index 0), que es el título de la película
     peliculas = peliculas.filter(pelicula => pelicula.titulo !== titulo); //Nos quedamos en la variable peliculas (array), con los titulos que no sean igual al titulo a borrar
     localStorage.setItem("peliculas", JSON.stringify(peliculas)); //Actualizamos el array de peliculas en localStorage
-    fila.remove(); //Eliminamos la fila del HTML
+    fila.remove(); //Eliminamos la fila del HTML (<tr> completo)
   }
 });
