@@ -11,7 +11,7 @@ for (let pelicula of peliculas) {
     <td>${pelicula.titulo}</td>
     <td>${pelicula.anio}</td>
     <td>${pelicula.descripcion}</td>
-    <td><img src="${pelicula.foto}" width="100"></td>
+    <td><img src="${pelicula.foto}"></td>
     <td>${pelicula.genero}</td>
     <td>
       <button type="button">Editar película</button>
@@ -67,9 +67,14 @@ form.addEventListener("submit", (event) => {
     return;
   }
 
-  //TERMINADA VALIDACIÓN DEL FORMULARIO, LIMPIAMOS LOS CAMPOS DEL MISMO
-  alert("Pelicula añadida");
-  form.reset(); //Una vez pasan todas las validaciones, limpiamos los campos del formulario
+  //Validamos que se haya seleccionado un género
+  if (!genero){
+    alert ("Por favor, selecciona un género")
+    return;
+  }
+
+  //Una vez pasan todas las validaciones, limpiamos los campos del formulario
+  form.reset(); 
 
   //AÑADIMOS PELICULA AL ARRAY
 
@@ -89,7 +94,7 @@ form.addEventListener("submit", (event) => {
     <td>${nuevaPelicula.titulo}</td>
     <td>${nuevaPelicula.anio}</td>
     <td>${nuevaPelicula.descripcion}</td>
-    <td><img src="${nuevaPelicula.foto}" width="100"></td>
+    <td><img src="${nuevaPelicula.foto}"></td>
     <td>${nuevaPelicula.genero}</td>
     <td>
       <button type="button">Editar película</button>
@@ -114,7 +119,7 @@ filtroGenero.addEventListener("change", (event) => {
         <td>${pelicula.titulo}</td>
         <td>${pelicula.anio}</td>
         <td>${pelicula.descripcion}</td>
-        <td><img src="${pelicula.foto}" width="100"></td>
+        <td><img src="${pelicula.foto}"></td>
         <td>${pelicula.genero}</td>
         <td>
           <button type="button">Editar película</button>
@@ -141,7 +146,7 @@ for (pelicula of peliculas) {
         <td>${pelicula.titulo}</td>
         <td>${pelicula.anio}</td>
         <td>${pelicula.descripcion}</td>
-        <td><img src="${pelicula.foto}" width="100"></td>
+        <td><img src="${pelicula.foto}"></td>
         <td>${pelicula.genero}</td>
         <td>
           <button type="button">Editar película</button>
@@ -151,3 +156,14 @@ for (pelicula of peliculas) {
     }
   }
 })
+
+//BORRAR PELICULA
+tablaPeliculas.addEventListener("click", (elemento) => { //Captura cuando se hace click en cualquier parte de la tabla
+  if (elemento.target.textContent === "Borrar película") { //Si el texto del elemento sobre el que se ha hecho click es igual a "Borrar película":
+    const fila = elemento.target.closest("tr"); //Con Closest seleccionamos el siguiente elemento padre que sea <tr>
+    const titulo = fila.children[0].textContent; //Toma el texto de la primera celda <td> de la fila (index 0), que es el título de la película
+    peliculas = peliculas.filter(pelicula => pelicula.titulo !== titulo); //Nos quedamos en la variable peliculas (array), con los titulos que no sean igual al titulo a borrar
+    localStorage.setItem("peliculas", JSON.stringify(peliculas)); //Actualizamos el array de peliculas en localStorage
+    fila.remove(); //Eliminamos la fila del HTML
+  }
+});

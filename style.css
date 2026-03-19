@@ -58,6 +58,15 @@ form button {
 
 table{
     width: 100%;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid var(--secondary-color);
+}
+
+thead{
+    background-color: var(--primary-color);
 }
 
 td {
@@ -65,7 +74,11 @@ td {
     word-break: break-word;
     overflow-wrap: break-word;
     text-align: center;
-  }
+}
+
+img{
+    width: 100px;
+}
 
 /* ============== */
 /* IDs y CLASES */
