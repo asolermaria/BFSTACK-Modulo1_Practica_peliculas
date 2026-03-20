@@ -2,7 +2,7 @@ const form = document.getElementById("form-anadir-peliculas"); //Declaramos el f
 const tablaPeliculas = document.getElementById("tabla-peliculas"); //Declaramos la tabla de HTML
 let peliculas = []; //Declaramos el array donde se almacenan las peliculas
 
-peliculas = JSON.parse(localStorage.getItem("peliculas")); //Convierte peliculas de nuevo a un array, ya que fue almacenado en localStorage como String, debido a que este solo soporta almacenamiento de Strings
+peliculas = JSON.parse(localStorage.getItem("peliculas")) || []; //Si hay peliculas el localStorage, convierte peliculas de nuevo a un array, ya que fue almacenado en localStorage como String, debido a que este solo soporta almacenamiento de Strings. Si no hay peliculas el localStorage, crea un array vacío.
 
 //Recupera las peliculas ya almacenadas en el array y las reflejamos en la tabla
 for (let pelicula of peliculas) {
@@ -65,13 +65,13 @@ form.addEventListener("submit", (event) => {
   }
 
   //Validamos que se haya seleccionado un género
-  if (!genero){
-    alert ("Por favor, selecciona un género")
+  if (!genero) {
+    alert("Por favor, selecciona un género");
     return;
   }
 
   //Una vez pasan todas las validaciones, limpiamos los campos del formulario
-  form.reset(); 
+  form.reset();
 
   //AÑADIMOS PELICULA AL ARRAY
   const nuevaPelicula = {
@@ -82,7 +82,7 @@ form.addEventListener("submit", (event) => {
     genero: genero,
   };
   peliculas.push(nuevaPelicula);
-  
+
   //Añade el array peliculas al localStorage como String, ya que localStorage solo almacena Strings
   localStorage.setItem("peliculas", JSON.stringify(peliculas));
 
@@ -131,14 +131,12 @@ filtroGenero.addEventListener("change", (event) => {
 const inputBusqueda = document.getElementById("busqueda-nombre");
 
 inputBusqueda.addEventListener("input", () => {
-const inputBusquedaMinuscula = inputBusqueda.value.toLowerCase()
-tablaPeliculas.innerHTML = "";
+  const inputBusquedaMinuscula = inputBusqueda.value.toLowerCase();
+  tablaPeliculas.innerHTML = "";
 
-for (pelicula of peliculas) {
-  let tituloPeliculaMinuscula = pelicula.titulo.toLowerCase()
-    if (
-      tituloPeliculaMinuscula.includes(inputBusquedaMinuscula)
-    ) {
+  for (pelicula of peliculas) {
+    let tituloPeliculaMinuscula = pelicula.titulo.toLowerCase();
+    if (tituloPeliculaMinuscula.includes(inputBusquedaMinuscula)) {
       tablaPeliculas.innerHTML += `<tr>
         <td>${pelicula.titulo}</td>
         <td>${pelicula.anio}</td>
@@ -152,14 +150,16 @@ for (pelicula of peliculas) {
       </tr>`;
     }
   }
-})
+});
 
 //BORRAR PELICULA
-tablaPeliculas.addEventListener("click", (elemento) => { //Captura cuando se hace click en cualquier parte de la tabla
-  if (elemento.target.textContent === "Borrar película") { //Si el texto del elemento sobre el que se ha hecho click es igual a "Borrar película":
+tablaPeliculas.addEventListener("click", (elemento) => {
+  //Captura cuando se hace click en cualquier parte de la tabla
+  if (elemento.target.textContent === "Borrar película") {
+    //Si el texto del elemento sobre el que se ha hecho click es igual a "Borrar película":
     const fila = elemento.target.closest("tr"); //Con Closest seleccionamos el siguiente elemento padre que sea <tr> (fila)
     const titulo = fila.children[0].textContent; //Toma el texto de la primera celda <td> de la fila (index 0), que es el título de la película
-    peliculas = peliculas.filter(pelicula => pelicula.titulo !== titulo); //Nos quedamos en la variable peliculas (array), con los titulos que no sean igual al titulo a borrar
+    peliculas = peliculas.filter((pelicula) => pelicula.titulo !== titulo); //Nos quedamos en la variable peliculas (array), con los titulos que no sean igual altitulo a borrar
     localStorage.setItem("peliculas", JSON.stringify(peliculas)); //Actualizamos el array de peliculas en localStorage
     fila.remove(); //Eliminamos la fila del HTML (<tr> completo)
   }
